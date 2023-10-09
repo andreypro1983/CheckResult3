@@ -1,6 +1,6 @@
-package ru.gb.animal.baggage;
+package ru.gb.model.animal.baggage;
 
-import ru.gb.animal.Animal;
+import ru.gb.model.animal.Animal;
 
 import java.util.Date;
 

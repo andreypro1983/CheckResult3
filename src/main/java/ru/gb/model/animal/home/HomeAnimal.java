@@ -1,6 +1,6 @@
-package ru.gb.animal.home;
+package ru.gb.model.animal.home;
 
-import ru.gb.animal.Animal;
+import ru.gb.model.animal.Animal;
 
 import java.util.Date;
 

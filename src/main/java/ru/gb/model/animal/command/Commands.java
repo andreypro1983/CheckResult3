@@ -1,4 +1,4 @@
-package ru.gb;
+package ru.gb.model.animal.command;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,10 @@ public class Commands {
 
     public ArrayList<Command> getCommands (){
         return this.commands;
+    }
+
+    public void addCommand (Command command){
+        commands.add(command);
     }
 
 }
