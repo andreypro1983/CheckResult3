@@ -7,6 +7,11 @@ import java.util.ArrayList;
 public class AnimalsList {
     private ArrayList<Animal> animals;
 
+    public AnimalsList(){
+        this.animals = new ArrayList<Animal>();
+    }
+
+
     public ArrayList<Animal> getAnimals() {
         return animals;
     }

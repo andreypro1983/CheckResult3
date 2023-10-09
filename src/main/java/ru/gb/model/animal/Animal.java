@@ -32,4 +32,7 @@ public abstract class Animal {
         return commands;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }
