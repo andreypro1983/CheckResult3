@@ -8,6 +8,7 @@ import ru.gb.model.animal.home.Cat;
 import ru.gb.model.animal.home.Dog;
 import ru.gb.model.animal.home.Hamster;
 import ru.gb.model.exeption.InputUserDataExeption;
+import ru.gb.model.exeption.NoSuchInfoExeption;
 import ru.gb.ui.Console;
 
 import java.text.SimpleDateFormat;
@@ -110,6 +111,18 @@ public class Service {
     }
     public String showCamels(){
         return animalsList.showCamels().isEmpty() ? "\nИнформация не найдена\n": animalsList.showCamels();
+    }
+
+    public String getAnimalsByName(String animalName) throws NoSuchInfoExeption {
+        return animalsList.getAnimalsInfoByName(animalName);
+    }
+
+    public int getCountAnimalsByName(String animalName){
+        return animalsList.getCountAnimalsByName(animalName);
+    }
+
+    public boolean addCommandToAnimal(String animalName,int animalNumber,int commandNumber){
+        return animalsList.addCommandToAnimal(animalName,animalNumber,commandNumber);
     }
 
     private String[] parseAnimalData(String inputData){

@@ -17,5 +17,14 @@ public class Hamster extends HomeAnimal{
         String formattedBirthday = formatter.format(this.getBirthday());
         return "id:"+this.getId()+" Имя: "+this.getName()+" Дата рождения: "+ formattedBirthday+ " Команды: "+this.getCommands().showCommands();
     }
-
+    public String getShortInfo() {
+        return "id:"+this.getId()+" Имя хомяка: "+this.getName()+" Команды: "+this.getCommands().showCommands();
+    }
+    public String getNumberAndAnimalInfo(int count){
+        StringBuilder sb = new StringBuilder();
+        sb.append(count+1).append(". ");
+        sb.append(this.getShortInfo());
+        sb.append("\n");
+        return sb.toString();
+    }
 }

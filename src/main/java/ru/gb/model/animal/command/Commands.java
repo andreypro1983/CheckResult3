@@ -9,7 +9,7 @@ public class Commands {
         this.commands = new ArrayList<Command>();
     }
 
-    public ArrayList<Command> getCommands (){
+    public ArrayList<Command> getArrayCommands (){
         return this.commands;
     }
 
@@ -30,4 +30,8 @@ public class Commands {
             return sb.toString();
         }
     }
+
+
+
+
     }

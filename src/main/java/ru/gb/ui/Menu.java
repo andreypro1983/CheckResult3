@@ -23,6 +23,22 @@ public class Menu {
             return sb.toString();
         }
 
+    public String commandMenu(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Выберите команду для добавления:\n");
+        sb.append("1. VOICE\n");
+        sb.append("2. REJOICE\n");
+        sb.append("3. RUN\n");
+        sb.append("4. JUMP\n");
+        sb.append("5. BRING_THING\n");
+        sb.append("6. REST\n");
+        sb.append("7. RUSTLE\n");
+        sb.append("8. MEOW\n");
+        sb.append("9. BARK\n");
+        sb.append("10. NEIGH\n");
+        return sb.toString();
+    }
+
 
     }
 

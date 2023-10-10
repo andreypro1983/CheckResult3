@@ -2,6 +2,7 @@ package ru.gb.ui;
 
 import ru.gb.model.Service;
 import ru.gb.model.exeption.InputUserDataExeption;
+import ru.gb.model.exeption.NoSuchInfoExeption;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -14,9 +15,9 @@ public class Console {
 
     private boolean isWork = true;
 
-    private static final String addHomeAnimalMessage = "Введите <Имя> <Дату_рождения> животного через пробел:";
-    private static final String addBaggageAnimalMessage = "Введите <Имя> <Дату_рождения> <Грузоподъемность> животного через пробел:";
-
+    private static final String ADD_HOME_ANIMAL_MESSAGE = "Введите <Имя> <Дату_рождения> животного через пробел:";
+    private static final String ADD_BAGGAGE_ANIMAL_MESSAGE = "Введите <Имя> <Дату_рождения> <Грузоподъемность> животного через пробел:";
+    private static final int COUNT_ENUM_COMMAND = 10;
     public Console() {
         this.menu = new Menu();
     }
@@ -44,15 +45,17 @@ public class Console {
                         exit();
                         break;
                 }
+            }catch(NoSuchInfoExeption e){
+                print(e.getMessage() + "\n");
             }catch (InputMismatchException e) {
                 print(e.getMessage() + "\n");
-            }catch (RuntimeException e) {
+            }catch (NoSuchElementException e) {
                 print(e.getMessage() + "\n");
             } catch (InputUserDataExeption e) {
                 print(e.getMessage() + ". Вы ввели " + e.getUserCount() + " из " + e.getRightCount() + "\n"
                         + "\nПовторите попытку\n");
             } catch (DataFormatException e) {
-                System.out.println(e.getMessage() + "\nПовторите попытку\n");
+                print(e.getMessage() + "\nПовторите попытку\n");
             }
         }
     }
@@ -66,49 +69,42 @@ public class Console {
         print("\nДо свидания!\n");
     }
 
-    private void addAnimal() throws RuntimeException,InputMismatchException, InputUserDataExeption, DataFormatException {
+    private void addAnimal() throws InputMismatchException,NoSuchElementException, InputUserDataExeption, DataFormatException {
         String newAnimal;
         print ("Добавление нового животного");
         print(menu.animalMenu());
         int inputValue = inputFromUser(6);
         switch (inputValue){
             case 1:
-                newAnimal = inputNewAnimal(addHomeAnimalMessage);
+                newAnimal = inputTextFromUser(ADD_HOME_ANIMAL_MESSAGE);
                 print(service.addAnimal(newAnimal,"dog")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
                 break;
             case 2:
-                newAnimal = inputNewAnimal(addHomeAnimalMessage);
+                newAnimal = inputTextFromUser(ADD_HOME_ANIMAL_MESSAGE);
                 print(service.addAnimal(newAnimal,"cat")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
                 break;
             case 3:
-                newAnimal = inputNewAnimal(addHomeAnimalMessage);
+                newAnimal = inputTextFromUser(ADD_HOME_ANIMAL_MESSAGE);
                 print(service.addAnimal(newAnimal,"hamster")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
                 break;
             case 4:
-                newAnimal = inputNewAnimal(addBaggageAnimalMessage);
+                newAnimal = inputTextFromUser(ADD_BAGGAGE_ANIMAL_MESSAGE);
                 print(service.addAnimal(newAnimal,"horse")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
                 break;
             case 5:
-                newAnimal = inputNewAnimal(addBaggageAnimalMessage);
+                newAnimal = inputTextFromUser(ADD_BAGGAGE_ANIMAL_MESSAGE);
                 print(service.addAnimal(newAnimal,"donkey")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
                 break;
             case 6:
-                newAnimal = inputNewAnimal(addBaggageAnimalMessage);
+                newAnimal = inputTextFromUser(ADD_BAGGAGE_ANIMAL_MESSAGE);
                 print(service.addAnimal(newAnimal,"camel")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
                 break;
 
         }
-
-
-
     }
 
-//    private String inputHomeAnimals() throws NoSuchElementException{
-//        String newAnimalInfo = inputString(addHomeAnimalMessage);
-//        return newAnimalInfo;
-//    }
 
-    private String inputNewAnimal(String message) throws NoSuchElementException {
+    private String inputTextFromUser(String message) throws NoSuchElementException {
         print(message);
         Scanner sc = new Scanner(System.in);
         String inputName = sc.nextLine();
@@ -148,17 +144,23 @@ public class Console {
 
     }
 
-    private void addCommandToAnimal(){
-
+    private void addCommandToAnimal() throws NoSuchElementException, NoSuchInfoExeption,InputMismatchException {
+        int animalNumber;
+        print ("Обучить животное новой команде");
+        String animalName = inputTextFromUser("Введите имя животного:");
+        int getCountAnimals =service.getCountAnimalsByName(animalName);
+        print("Результаты поиска:");
+        print(service.getAnimalsByName(animalName));
+        if(getCountAnimals > 1){
+            animalNumber =inputFromUser(getCountAnimals)-1;
+        }else{animalNumber = 0;}
+        print(menu.commandMenu());
+        int commandNumber =inputFromUser(COUNT_ENUM_COMMAND);
+        print(service.addCommandToAnimal(animalName,animalNumber,commandNumber)?"Команда успешно добавлена": "Такая команда уже существует");
     }
 
-//    private String inputNewAnimal(){
-//        Scanner sc = new Scanner(System.in, "Cp866");
-//        int
-//    }
 
-
-    private int inputFromUser(int maxMenuValue) throws RuntimeException,InputMismatchException{
+    private int inputFromUser(int maxMenuValue) throws NoSuchElementException,InputMismatchException{
         Scanner sc = new Scanner(System.in);
         int inputData;
         try {
@@ -166,7 +168,7 @@ public class Console {
             inputData = sc.nextInt();
             if (inputData > maxMenuValue || inputData < 1) {
 
-                throw new RuntimeException("Необходимо выбрать пункт от 1 до "+maxMenuValue);
+                throw new NoSuchElementException("Необходимо выбрать пункт от 1 до "+maxMenuValue);
             }
         }
         catch (InputMismatchException e) {

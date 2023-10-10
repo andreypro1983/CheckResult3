@@ -1,7 +1,7 @@
 package ru.gb.model.animal.home;
 
 import ru.gb.model.animal.command.Command;
-import ru.gb.model.animal.command.Commands;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,4 +21,14 @@ public class Dog extends HomeAnimal{
     }
 
 
+    public String getShortInfo() {
+        return "id:"+this.getId()+" Имя собаки: "+this.getName()+" Команды: "+this.getCommands().showCommands();
+    }
+    public String getNumberAndAnimalInfo(int count){
+        StringBuilder sb = new StringBuilder();
+        sb.append(count+1).append(". ");
+        sb.append(this.getShortInfo());
+        sb.append("\n");
+        return sb.toString();
+    }
 }
