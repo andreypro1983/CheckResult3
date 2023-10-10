@@ -19,7 +19,7 @@ public abstract class Animal {
         this.birthday=birthday;
         this.commands = new Commands();
     }
-
+    public int getId() {return  id;}
     public Date getBirthday() {
         return birthday;
     }
@@ -31,6 +31,8 @@ public abstract class Animal {
     public Commands getCommands() {
         return commands;
     }
+
+    public abstract String getInfo();
 
     public void setId(int id) {
         this.id = id;

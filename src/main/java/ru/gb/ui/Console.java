@@ -110,7 +110,7 @@ public class Console {
 
     private String inputNewAnimal(String message) throws NoSuchElementException {
         print(message);
-        Scanner sc = new Scanner(System.in,"Cp866");
+        Scanner sc = new Scanner(System.in);
         String inputName = sc.nextLine();
         if (inputName.isEmpty()){
             throw new NoSuchElementException("Данные не были введены");
@@ -122,6 +122,29 @@ public class Console {
 
 
     private void showAnimalCommands(){
+        print ("Отображение списка команд животного");
+        print(menu.animalMenu());
+        int inputValue = inputFromUser(6);
+        switch (inputValue){
+            case 1:
+                print(service.showDogs());
+                break;
+            case 2:
+                print(service.showCats());
+                break;
+            case 3:
+                print(service.showHamsters());
+                break;
+            case 4:
+                print(service.showHorses());
+                break;
+            case 5:
+                print(service.showDonkeys());
+                break;
+            case 6:
+                print(service.showCamels());
+                break;
+        }
 
     }
 
@@ -136,7 +159,7 @@ public class Console {
 
 
     private int inputFromUser(int maxMenuValue) throws RuntimeException,InputMismatchException{
-        Scanner sc = new Scanner(System.in, "Cp866");
+        Scanner sc = new Scanner(System.in);
         int inputData;
         try {
             System.out.println("Выберите пункт меню:");

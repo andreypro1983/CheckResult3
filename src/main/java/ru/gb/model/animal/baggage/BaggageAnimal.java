@@ -12,7 +12,13 @@ public abstract class BaggageAnimal extends Animal {
         this.cargo = weight;
     }
 
+
+
     public int getCargo() {
         return cargo;
     }
+
+    public abstract String getInfo();
+
+
 }

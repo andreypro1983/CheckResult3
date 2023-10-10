@@ -17,4 +17,17 @@ public class Commands {
         commands.add(command);
     }
 
-}
+    public String showCommands() {
+        StringBuilder sb = new StringBuilder();
+        if (commands.isEmpty()) {
+            return "Нет команд";
+        }else {
+                for (Command command : commands) {
+                    sb.append(command);
+                    sb.append(", ");
+                }
+                sb.deleteCharAt(sb.length()-2);
+            return sb.toString();
+        }
+    }
+    }

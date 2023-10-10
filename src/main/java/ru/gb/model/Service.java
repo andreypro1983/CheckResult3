@@ -89,6 +89,29 @@ public class Service {
         animalsList.addAnimal(animal);
     }
 
+    public String showDogs(){
+        return animalsList.showDogs().isEmpty() ? "\nИнформация не найдена\n": animalsList.showDogs();
+    }
+
+    public String showCats(){
+        return animalsList.showCats().isEmpty() ? "\nИнформация не найдена\n": animalsList.showCats();
+    }
+
+    public String showHamsters(){
+        return animalsList.showHamsters().isEmpty() ? "\nИнформация не найдена\n": animalsList.showHamsters();
+    }
+
+    public String showHorses(){
+        return animalsList.showHorses().isEmpty() ? "\nИнформация не найдена\n": animalsList.showHorses();
+    }
+
+    public String showDonkeys(){
+        return animalsList.showDonkeys().isEmpty() ? "\nИнформация не найдена\n": animalsList.showDonkeys();
+    }
+    public String showCamels(){
+        return animalsList.showCamels().isEmpty() ? "\nИнформация не найдена\n": animalsList.showCamels();
+    }
+
     private String[] parseAnimalData(String inputData){
         return inputData.split(" ");
     }
