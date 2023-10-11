@@ -11,7 +11,6 @@ public class FileHandler implements Saveble, Loadable {
             System.out.println("Не удается сохранить файл");
         } catch (Exception e) {
             throw new IOException("Не удалось сохранить данные\n"+e.getMessage());
-//            System.out.println(e.getMessage());
         }
     }
 
@@ -20,7 +19,6 @@ public class FileHandler implements Saveble, Loadable {
         try (ObjectInputStream loadStream = new ObjectInputStream(new FileInputStream(path))) {
             return loadStream.readObject();
         } catch (Exception e) {
-//                   System.out.println(e.getMessage());
             throw new IOException("Не удалось загрузить данные по пути "+e.getMessage());
 //            return null;
         }

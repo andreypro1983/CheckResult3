@@ -14,7 +14,6 @@ import ru.gb.model.handler.Saveble;
 import ru.gb.ui.Console;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.zip.DataFormatException;
@@ -105,8 +104,6 @@ public class Service {
 
 
     private void addAnimalToAnimalsList (Animal animal){
-//        animal.setId(counter.getId());
-//        counter.add();
         animalsList.addAnimal(animal);
     }
 
@@ -156,15 +153,15 @@ public class Service {
     }
 
     private boolean checkCountInputElements(String[] inputData, int rightCount) throws InputUserDataExeption{
-        boolean isCorrect = true;
+        boolean isCorrect = false;
         if (inputData.length < rightCount) {
-            isCorrect = false;
+//            isCorrect = false;
             throw new InputUserDataExeption("Введено меньше данных чем требовалось",inputData.length,rightCount);
         } else if (inputData.length > rightCount) {
-            isCorrect = false;
-            throw new InputUserDataExeption("Введено меньше данных чем требовалось",inputData.length,rightCount);
+//            isCorrect = false;
+            throw new InputUserDataExeption("Введено больше данных чем требовалось",inputData.length,rightCount);
         } else {
-            return isCorrect;
+            return !isCorrect;
         }
     }
 
@@ -177,7 +174,6 @@ public class Service {
             sdf.setLenient(false);
             parseDate = sdf.parse(birthday);
         } catch (Exception e) {
-            parseDate = null;
             throw new DataFormatException("Введенная дата не соответствует формату " + DATE_FORMAT.toLowerCase());
         }
         return parseDate;

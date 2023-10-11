@@ -128,7 +128,7 @@ public class AnimalsList implements Serializable {
             return sb.toString();
         }else
         {throw new NoSuchInfoExeption("Информация по животным с именем "+animalName+" не найдена");}
-//        {return null;}
+
     }
 
     public int getCountAnimalsByName(String animalName){
@@ -172,10 +172,7 @@ public class AnimalsList implements Serializable {
         counter.add();
         animals.add(animal);
     }
-//
-//    public void deleteAnimal(Animal animal){
-//
-//    }
+
 
 
 
