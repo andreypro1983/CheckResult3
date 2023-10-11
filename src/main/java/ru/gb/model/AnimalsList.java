@@ -11,14 +11,16 @@ import ru.gb.model.animal.home.Dog;
 import ru.gb.model.animal.home.Hamster;
 import ru.gb.model.exeption.NoSuchInfoExeption;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class AnimalsList {
+public class AnimalsList implements Serializable {
     private ArrayList<Animal> animals;
-
+    private Counter counter;
     public AnimalsList(){
         this.animals = new ArrayList<Animal>();
+        this.counter = new Counter();
     }
 
 
@@ -166,6 +168,8 @@ public class AnimalsList {
     }
 
     public void addAnimal(Animal animal){
+        animal.setId(counter.getId());
+        counter.add();
         animals.add(animal);
     }
 //

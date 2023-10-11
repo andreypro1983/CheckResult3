@@ -4,6 +4,7 @@ import ru.gb.model.Service;
 import ru.gb.model.exeption.InputUserDataExeption;
 import ru.gb.model.exeption.NoSuchInfoExeption;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -17,7 +18,7 @@ public class Console {
 
     private static final String ADD_HOME_ANIMAL_MESSAGE = "\nВведите <Имя> <Дату_рождения> животного через пробел:";
     private static final String ADD_BAGGAGE_ANIMAL_MESSAGE = "\nВведите <Имя> <Дату_рождения> <Грузоподъемность> животного через пробел:";
-    private static final int COUNT_ENUM_COMMAND = 10;
+
     public Console() {
         this.menu = new Menu();
     }
@@ -30,7 +31,7 @@ public class Console {
         while(isWork){
             print(menu.mainMenu());
             try {
-                int inputValue = inputFromUser(4);
+                int inputValue = inputFromUser(menu.getCountMainMenu());
                 switch (inputValue) {
                     case 1:
                         addAnimal();
@@ -42,6 +43,12 @@ public class Console {
                         addCommandToAnimal();
                         break;
                     case 4:
+                        save();
+                        break;
+                    case 5:
+                        load();
+                        break;
+                    case 6:
                         exit();
                         break;
                 }
@@ -56,6 +63,8 @@ public class Console {
                         + "\nПовторите попытку\n");
             } catch (DataFormatException e) {
                 print("\n"+e.getMessage() + "\nПовторите попытку\n");
+            }catch (IOException e) {
+                print("\n"+e.getMessage() + "\nПовторите попытку\n");
             }
         }
     }
@@ -63,6 +72,18 @@ public class Console {
     private void print(String text){
         System.out.println(text);
     }
+
+    private void save() throws IOException {
+        print("\nСохранение текущего списка животных:\n");
+        service.save();
+        print("Сохранение успешно завершено\n");
+        }
+    private void load() throws IOException {
+        print("\nЗагрузка сохраненного списка животных:\n");
+        service.load();
+        print("Загрузка успешно завершена\n");
+    }
+
 
     private void exit() {
         isWork = false;
@@ -73,7 +94,7 @@ public class Console {
         String newAnimal;
         print ("\nДобавление нового животного");
         print(menu.animalMenu());
-        int inputValue = inputFromUser(6);
+        int inputValue = inputFromUser(menu.getCountAnimalMenu());
         switch (inputValue){
             case 1:
                 newAnimal = inputTextFromUser(ADD_HOME_ANIMAL_MESSAGE);
@@ -117,10 +138,11 @@ public class Console {
 
 
 
-    private void showAnimalCommands(){
+    private void showAnimalCommands() throws NoSuchElementException,InputMismatchException{
         print ("\nОтображение списка команд животного");
         print(menu.animalMenu());
-        int inputValue = inputFromUser(6);
+        int inputValue = inputFromUser(menu.getCountAnimalMenu());
+        print("\nРезультат:");
         switch (inputValue){
             case 1:
                 print(service.showDogs());
@@ -155,7 +177,7 @@ public class Console {
             animalNumber =inputFromUser(getCountAnimals)-1;
         }else{animalNumber = 0;}
         print(menu.commandMenu());
-        int commandNumber =inputFromUser(COUNT_ENUM_COMMAND);
+        int commandNumber =inputFromUser(menu.getCountCommandMenu());
         print(service.addCommandToAnimal(animalName,animalNumber,commandNumber)?"\nКоманда успешно добавлена\n": "\nТакая команда уже существует\n");
     }
 

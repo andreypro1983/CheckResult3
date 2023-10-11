@@ -9,24 +9,31 @@ import ru.gb.model.animal.home.Dog;
 import ru.gb.model.animal.home.Hamster;
 import ru.gb.model.exeption.InputUserDataExeption;
 import ru.gb.model.exeption.NoSuchInfoExeption;
+import ru.gb.model.handler.Loadable;
+import ru.gb.model.handler.Saveble;
 import ru.gb.ui.Console;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.zip.DataFormatException;
 
 public class Service {
     private static final String DATE_FORMAT = "dd.MM.yyyy";
-    Console console;
-    Counter counter;
+    private Console console;
+    private Saveble saveble;
+    private Loadable loadable;
+
+    private static final String PATH = "src/main/java/ru/gb/model/db/animalsList.txt";
 
     AnimalsList animalsList;
 
-    public Service(Console console) {
+    public Service(Console console,Saveble saveble, Loadable loadable) {
         this.console = console;
         this.animalsList = new AnimalsList();
-        this.counter = new Counter();
+        this.saveble = saveble;
+        this.loadable = loadable;
         console.setService(this);
     }
 
@@ -84,33 +91,52 @@ public class Service {
    return true;
     }
 
+    public void load() throws IOException {
+        if (loadable != null) {
+            this.animalsList =  (AnimalsList) loadable.load(PATH);
+        }
+    }
+
+    public void save() throws IOException {
+        if (saveble != null) {
+            saveble.save(PATH, animalsList);
+        }
+    }
+
+
     private void addAnimalToAnimalsList (Animal animal){
-        animal.setId(counter.getId());
-        counter.add();
+//        animal.setId(counter.getId());
+//        counter.add();
         animalsList.addAnimal(animal);
     }
 
     public String showDogs(){
-        return animalsList.showDogs().isEmpty() ? "\nИнформация не найдена\n": animalsList.showDogs();
+        String info =animalsList.showDogs();
+        return info.isEmpty() ? "Информация не найдена\n": info;
     }
 
     public String showCats(){
-        return animalsList.showCats().isEmpty() ? "\nИнформация не найдена\n": animalsList.showCats();
+        String info =animalsList.showCats();
+        return info.isEmpty() ? "Информация не найдена\n": info;
     }
 
     public String showHamsters(){
-        return animalsList.showHamsters().isEmpty() ? "\nИнформация не найдена\n": animalsList.showHamsters();
+        String info =animalsList.showHamsters();
+        return info.isEmpty() ? "Информация не найдена\n": info;
     }
 
     public String showHorses(){
-        return animalsList.showHorses().isEmpty() ? "\nИнформация не найдена\n": animalsList.showHorses();
+        String info =animalsList.showHorses();
+        return info.isEmpty() ? "Информация не найдена\n": info;
     }
 
     public String showDonkeys(){
-        return animalsList.showDonkeys().isEmpty() ? "\nИнформация не найдена\n": animalsList.showDonkeys();
+        String info =animalsList.showDonkeys();
+        return info.isEmpty() ? "Информация не найдена\n": info;
     }
     public String showCamels(){
-        return animalsList.showCamels().isEmpty() ? "\nИнформация не найдена\n": animalsList.showCamels();
+        String info =animalsList.showCamels();
+        return info.isEmpty() ? "Информация не найдена\n": info;
     }
 
     public String getAnimalsByName(String animalName) throws NoSuchInfoExeption {
@@ -160,6 +186,5 @@ public class Service {
     private int parseAnimalCargo(String cargo) throws NumberFormatException {
         return Integer.parseInt(cargo);
     }
-
 
 }

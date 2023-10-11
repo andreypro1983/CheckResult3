@@ -2,9 +2,10 @@ package ru.gb.model.animal;
 
 import ru.gb.model.animal.command.Commands;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Animal {
+public abstract class Animal implements Serializable {
     private int id;
     private String name;
     private Date birthday;

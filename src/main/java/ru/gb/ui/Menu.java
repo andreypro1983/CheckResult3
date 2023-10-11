@@ -1,13 +1,18 @@
 package ru.gb.ui;
 
 public class Menu {
+    private static final int COUNT_MENU_ITEMS = 6;
+    private static final int COUNT_ANIMAL_MENU_ITEMS = 6;
+    private static final int COUNT_COMMAND_MENU_ITEMS = 10;
            public String mainMenu() {
             StringBuilder sb = new StringBuilder();
             sb.append("МЕНЮ:\n");
             sb.append("1. Добавить новое животное\n");
             sb.append("2. Вывести список команд животного\n");
             sb.append("3. Обучить животное новой команде\n");
-            sb.append("4. Выход\n");
+            sb.append("4. Сохранить список животных\n");
+            sb.append("5. Загрузить список животных\n");
+            sb.append("6. Выход\n");
             return sb.toString();
         }
 
@@ -39,6 +44,16 @@ public class Menu {
         return sb.toString();
     }
 
+    public int getCountMainMenu(){
+        return COUNT_MENU_ITEMS;
+    }
+
+    public int getCountAnimalMenu(){
+        return COUNT_ANIMAL_MENU_ITEMS;
+    }
+    public int getCountCommandMenu(){
+        return COUNT_COMMAND_MENU_ITEMS;
+    }
 
     }
 

@@ -1,7 +1,9 @@
 package ru.gb.model;
 
 
-public class Counter {
+import java.io.Serializable;
+
+public class Counter implements Serializable {
     private int id;
 
     public Counter(){

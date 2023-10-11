@@ -1,8 +1,9 @@
 package ru.gb.model.animal.command;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Commands {
+public class Commands implements Serializable {
     private ArrayList<Command> commands;
 
     public Commands(){
