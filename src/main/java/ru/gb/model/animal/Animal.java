@@ -34,6 +34,8 @@ public abstract class Animal {
 
     public abstract String getInfo();
 
+    public abstract String getNumberAndAnimalInfo(int count);
+
     public void setId(int id) {
         this.id = id;
     }

@@ -31,9 +31,8 @@ public class AnimalsList {
         int count = 0;
         for (Animal animal: animals) {
             if (animal instanceof Dog){
-                Dog dog = (Dog)animal;
                 sb.append(count+1).append(". ");
-                sb.append(dog.getInfo());
+                sb.append(animal.getInfo());
                 sb.append("\n");
                 count++;
             }
@@ -46,9 +45,8 @@ public class AnimalsList {
         int count = 0;
         for (Animal animal: animals) {
             if (animal instanceof Cat){
-                Cat cat = (Cat)animal;
                 sb.append(count+1).append(". ");
-                sb.append(cat.getInfo());
+                sb.append(animal.getInfo());
                 sb.append("\n");
                 count++;
             }
@@ -61,9 +59,8 @@ public class AnimalsList {
         int count = 0;
         for (Animal animal: animals) {
             if (animal instanceof Hamster){
-                Hamster hamster = (Hamster)animal;
                 sb.append(count+1).append(". ");
-                sb.append(hamster.getInfo());
+                sb.append(animal.getInfo());
                 sb.append("\n");
                 count++;
             }
@@ -76,9 +73,8 @@ public class AnimalsList {
         int count = 0;
         for (Animal animal: animals) {
             if (animal instanceof Horse){
-                Horse horse = (Horse)animal;
                 sb.append(count+1).append(". ");
-                sb.append(horse.getInfo());
+                sb.append(animal.getInfo());
                 sb.append("\n");
                 count++;
             }
@@ -91,9 +87,8 @@ public class AnimalsList {
         int count = 0;
         for (Animal animal: animals) {
             if (animal instanceof Donkey){
-                Donkey donkey = (Donkey)animal;
                 sb.append(count+1).append(". ");
-                sb.append(donkey.getInfo());
+                sb.append(animal.getInfo());
                 sb.append("\n");
                 count++;
             }
@@ -106,9 +101,8 @@ public class AnimalsList {
         int count = 0;
         for (Animal animal: animals) {
             if (animal instanceof Camel){
-                Camel camel = (Camel)animal;
                 sb.append(count+1).append(". ");
-                sb.append(camel.getInfo());
+                sb.append(animal.getInfo());
                 sb.append("\n");
                 count++;
             }
@@ -122,33 +116,16 @@ public class AnimalsList {
 
     public String getAnimalsInfoByName(String animalName) throws NoSuchInfoExeption{
         ArrayList<Animal> animalsList = getAnimalsByName(animalName);
-        if(!animalsList.isEmpty()){
-        StringBuilder sb = new StringBuilder();
-        int count = 0;
-        for (Animal animal: animalsList) {
-            if (animal instanceof Dog) {
-                sb.append(((Dog)animal).getNumberAndAnimalInfo(count));
-                count++;
-            } else if (animal instanceof Cat) {
-                sb.append(((Cat)animal).getNumberAndAnimalInfo(count));
-                count++;
-            }else if (animal instanceof Hamster) {
-                sb.append(((Hamster)animal).getNumberAndAnimalInfo(count));
-                count++;
-            }else if (animal instanceof Horse) {
-                sb.append(((Horse)animal).getNumberAndAnimalInfo(count));
-                count++;
-            }else if (animal instanceof Donkey) {
-                sb.append(((Donkey)animal).getNumberAndAnimalInfo(count));
-                count++;
-            }else if (animal instanceof Camel) {
-                sb.append(((Camel) animal).getNumberAndAnimalInfo(count));
+        if(!animalsList.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            int count = 0;
+            for (Animal animal : animalsList) {
+                sb.append(animal.getNumberAndAnimalInfo(count));
                 count++;
             }
-        }
             return sb.toString();
-        }
-        else throw new NoSuchInfoExeption("Информация по животным с именем "+animalName+" не найдена");
+        }else
+        {throw new NoSuchInfoExeption("Информация по животным с именем "+animalName+" не найдена");}
 //        {return null;}
     }
 

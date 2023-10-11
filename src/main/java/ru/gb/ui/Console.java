@@ -15,8 +15,8 @@ public class Console {
 
     private boolean isWork = true;
 
-    private static final String ADD_HOME_ANIMAL_MESSAGE = "Введите <Имя> <Дату_рождения> животного через пробел:";
-    private static final String ADD_BAGGAGE_ANIMAL_MESSAGE = "Введите <Имя> <Дату_рождения> <Грузоподъемность> животного через пробел:";
+    private static final String ADD_HOME_ANIMAL_MESSAGE = "\nВведите <Имя> <Дату_рождения> животного через пробел:";
+    private static final String ADD_BAGGAGE_ANIMAL_MESSAGE = "\nВведите <Имя> <Дату_рождения> <Грузоподъемность> животного через пробел:";
     private static final int COUNT_ENUM_COMMAND = 10;
     public Console() {
         this.menu = new Menu();
@@ -46,16 +46,16 @@ public class Console {
                         break;
                 }
             }catch(NoSuchInfoExeption e){
-                print(e.getMessage() + "\n");
+                print("\n"+e.getMessage() + "\n");
             }catch (InputMismatchException e) {
-                print(e.getMessage() + "\n");
+                print("\n"+e.getMessage() + "\n");
             }catch (NoSuchElementException e) {
-                print(e.getMessage() + "\n");
+                print("\n"+e.getMessage() + "\n");
             } catch (InputUserDataExeption e) {
-                print(e.getMessage() + ". Вы ввели " + e.getUserCount() + " из " + e.getRightCount() + "\n"
+                print("\n"+e.getMessage() + ". Вы ввели " + e.getUserCount() + " из " + e.getRightCount() + "\n"
                         + "\nПовторите попытку\n");
             } catch (DataFormatException e) {
-                print(e.getMessage() + "\nПовторите попытку\n");
+                print("\n"+e.getMessage() + "\nПовторите попытку\n");
             }
         }
     }
@@ -71,33 +71,33 @@ public class Console {
 
     private void addAnimal() throws InputMismatchException,NoSuchElementException, InputUserDataExeption, DataFormatException {
         String newAnimal;
-        print ("Добавление нового животного");
+        print ("\nДобавление нового животного");
         print(menu.animalMenu());
         int inputValue = inputFromUser(6);
         switch (inputValue){
             case 1:
                 newAnimal = inputTextFromUser(ADD_HOME_ANIMAL_MESSAGE);
-                print(service.addAnimal(newAnimal,"dog")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
+                print(service.addAnimal(newAnimal,"dog")?"\nЖивотное успешно добавлено\n":"\nНе удалось добавить животное\n");
                 break;
             case 2:
                 newAnimal = inputTextFromUser(ADD_HOME_ANIMAL_MESSAGE);
-                print(service.addAnimal(newAnimal,"cat")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
+                print(service.addAnimal(newAnimal,"cat")?"\nЖивотное успешно добавлено\n":"\nНе удалось добавить животное\n");
                 break;
             case 3:
                 newAnimal = inputTextFromUser(ADD_HOME_ANIMAL_MESSAGE);
-                print(service.addAnimal(newAnimal,"hamster")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
+                print(service.addAnimal(newAnimal,"hamster")?"\nЖивотное успешно добавлено\n":"\nНе удалось добавить животное\n");
                 break;
             case 4:
                 newAnimal = inputTextFromUser(ADD_BAGGAGE_ANIMAL_MESSAGE);
-                print(service.addAnimal(newAnimal,"horse")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
+                print(service.addAnimal(newAnimal,"horse")?"\nЖивотное успешно добавлено\n":"\nНе удалось добавить животное\n");
                 break;
             case 5:
                 newAnimal = inputTextFromUser(ADD_BAGGAGE_ANIMAL_MESSAGE);
-                print(service.addAnimal(newAnimal,"donkey")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
+                print(service.addAnimal(newAnimal,"donkey")?"\nЖивотное успешно добавлено\n":"\nНе удалось добавить животное\n");
                 break;
             case 6:
                 newAnimal = inputTextFromUser(ADD_BAGGAGE_ANIMAL_MESSAGE);
-                print(service.addAnimal(newAnimal,"camel")?"Животное успешно добавлено\n":"Не удалось добавить животное\n");
+                print(service.addAnimal(newAnimal,"camel")?"\nЖивотное успешно добавлено\n":"\nНе удалось добавить животное\n");
                 break;
 
         }
@@ -118,7 +118,7 @@ public class Console {
 
 
     private void showAnimalCommands(){
-        print ("Отображение списка команд животного");
+        print ("\nОтображение списка команд животного");
         print(menu.animalMenu());
         int inputValue = inputFromUser(6);
         switch (inputValue){
@@ -146,17 +146,17 @@ public class Console {
 
     private void addCommandToAnimal() throws NoSuchElementException, NoSuchInfoExeption,InputMismatchException {
         int animalNumber;
-        print ("Обучить животное новой команде");
+        print ("\nОбучить животное новой команде\n");
         String animalName = inputTextFromUser("Введите имя животного:");
         int getCountAnimals =service.getCountAnimalsByName(animalName);
-        print("Результаты поиска:");
+        print("\nРезультаты поиска:");
         print(service.getAnimalsByName(animalName));
         if(getCountAnimals > 1){
             animalNumber =inputFromUser(getCountAnimals)-1;
         }else{animalNumber = 0;}
         print(menu.commandMenu());
         int commandNumber =inputFromUser(COUNT_ENUM_COMMAND);
-        print(service.addCommandToAnimal(animalName,animalNumber,commandNumber)?"Команда успешно добавлена": "Такая команда уже существует");
+        print(service.addCommandToAnimal(animalName,animalNumber,commandNumber)?"\nКоманда успешно добавлена\n": "\nТакая команда уже существует\n");
     }
 
 
